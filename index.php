@@ -26,9 +26,8 @@
                 $post_content = substr($row['post_content'], 0, 100);
 
 
-                if ($post_status !== 'published') {
-                    echo "<h1 class='text-center'>NO POSTS SORRY</h1>";
-                } else {
+                if ($post_status == 'published') {
+
 
 
 
@@ -47,10 +46,12 @@
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date; ?></p>
                     <hr>
-                    <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
+                    <a href="post.php?p_id=<?php echo $post_id; ?>">
+                        <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
+                    </a>
                     <hr>
                     <p><?php echo $post_content; ?></p>
-                    <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                     <hr>
 

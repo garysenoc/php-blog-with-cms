@@ -26,9 +26,7 @@ if (isset($_POST['login'])) {
         $user_role = $row['user_role'];
     }
 
-    if ($username !== $user_username && $password !== $user_password) {
-        header("Location: ../index.php");
-    } else if ($username == $user_username && $password == $user_password) {
+    if ($username == $user_username && $password == $user_password) {
         $_SESSION['username'] = $user_username;
         $_SESSION['firstname'] = $user_firstname;
         $_SESSION['lastname'] = $user_lastname;
