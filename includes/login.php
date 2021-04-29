@@ -24,7 +24,9 @@ if (isset($_POST['login'])) {
         $user_firstname = $row['user_firstname'];
         $user_lastname = $row['user_lastname'];
         $user_role = $row['user_role'];
+        $user_rand = $row['randSalt'];
     }
+    $password = crypt($user_rand, $password);
 
     if ($username == $user_username && $password == $user_password) {
         $_SESSION['username'] = $user_username;
