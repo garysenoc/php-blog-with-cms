@@ -36,7 +36,7 @@ if (isset($_POST['checkBoxArray'])) {
                     $post_comment_count = $row['post_comment_count'];
                     $post_date = $row['post_date'];
                 }
-                $query = "INSERT INTO posts values(null,$post_category_id,'$post_title','$post_author', now(),'$post_image','$post_content','$post_tags','$post_comment_count','$post_status')";
+                $query = "INSERT INTO posts values(null,$post_category_id,'$post_title','$post_author', now(),'$post_image','$post_content','$post_tags','$post_comment_count','$post_status',0)";
                 $create_post_query = mysqli_query($connection, $query);
                 break;
         }
@@ -128,7 +128,7 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<td><a href='../post.php?p_id={$post_id}'>View Post</a></td>";
                 echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
                 echo "<td><a onclick=\"javascript: return confirm('Are you sure you want to delete?'); \" href='posts.php?delete={$post_id}'>Delete</a></td>";
-                echo "<td>$post_views_count</td>";
+                echo "<td><a href='posts.php?reset_views={$post_id}'>$post_views_count</a?</td>";
                 echo "</tr>";
             }
             ?>
@@ -142,6 +142,14 @@ if (isset($_GET['delete'])) {
     $the_post_id = $_GET['delete'];
     $query = "DELETE FROM posts where post_id = $the_post_id";
     $delete_query = mysqli_query($connection, $query);
+    header("Location: posts.php");
+}
+
+if (isset($_GET['reset_views'])) {
+    $the_post_id = $_GET['reset_views'];
+    $the_post_id = mysqli_real_escape_string($connection, $the_post_id);
+    $query = "UPDATE  posts set post_views_count = 0  where post_id = $the_post_id";
+    $reset_views_query = mysqli_query($connection, $query);
     header("Location: posts.php");
 }
 
